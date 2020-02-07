@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types'
 import Error from './Error'
+import shortid from 'shortid'
 
-const Form = () => {
+const Form = ({addNewExpense}) => {
 
     const [name, setName] = useState('');
     const [quantity, setQuantity] = useState(0);
@@ -15,6 +17,20 @@ const Form = () => {
             return
         }
         setError(false)
+
+        // create expense
+        const expense = {
+            name,
+            quantity,
+            id: shortid.generate()
+        }
+        addNewExpense(expense)
+        
+        // reset form
+        setName('')
+        setQuantity(0)
+
+
     }
     return ( 
         <form onSubmit={addExpense}>
@@ -51,4 +67,9 @@ const Form = () => {
      );
 }
  
+
+Form.prototype = {
+    addNewExpense: PropTypes.func.isRequired
+}
+
 export default Form;
