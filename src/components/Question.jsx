@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react'
 import PropTypes from 'prop-types'
 import Error from './Error'
 
-const Question = ({ setBudget, setBalance }) => {
+const Question = ({ setBudget, setBalance, setShowQuestion }) => {
 
     const [ quantity, setQuantity ] = useState(0)
 
@@ -23,6 +23,7 @@ const Question = ({ setBudget, setBalance }) => {
         setError(false)
         setBudget(quantity)
         setBalance(quantity)
+        setShowQuestion(false)
     }
 
     return ( 
@@ -50,7 +51,8 @@ const Question = ({ setBudget, setBalance }) => {
 
 Question.prototype = {
     setBudget: PropTypes.func.isRequired,
-    setBalance: PropTypes.func.isRequired
+    setBalance: PropTypes.func.isRequired,
+    setShowQuestion: PropTypes.func.isRequired
 }
  
 export default Question
