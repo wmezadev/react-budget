@@ -1,17 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const Form = () => {
+
+    const [name, setName] = useState('');
+    const [quantity, setQuantity] = useState(0);
+    const addExpense = e => {
+        e.preventDefault()
+    }
     return ( 
-        <form >
+        <form onSubmit={addExpense}>
             <h2>Add your expenses here</h2>
 
             <div className="field">
                 <label>Expense name</label>
-                <input type="text" className="u-full-width" name="name" placeholder="E.g., Transportation"/>
+                <input 
+                    type="text" 
+                    className="u-full-width" 
+                    name="name" 
+                    value={name}
+                    placeholder="E.g., Transportation"
+                    onChange={e => setName(e.target.value)}
+                />
             </div>
             <div className="field">
                 <label>Expense value</label>
-                <input type="number" className="u-full-width" name="value" placeholder="E.g., 300"/>
+                <input 
+                    type="number" 
+                    className="u-full-width" 
+                    name="value" 
+                    value={quantity}
+                    placeholder="E.g., 300"
+                    onChange={e => setQuantity(parseInt(e.target.value))}
+                />
             </div>
 
             <button
