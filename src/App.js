@@ -26,8 +26,7 @@ function App() {
       setBalance(newBalance)
       setCreateExpense(false)
     }
-    // eslint-disable-next-line
-  }, [expense]);
+  }, [expense, expenses, create_expense, balance]);
 
 
   return (
