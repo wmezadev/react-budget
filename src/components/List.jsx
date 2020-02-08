@@ -4,7 +4,7 @@ import Expense from './Expense'
 const List = ({expenses}) => {
     return ( 
         <div className="expenses">
-            <h2>List</h2>
+            <h2>Expenses list</h2>
             {
                 expenses.map(expense => (
                     <Expense

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Question from './components/Question'
 import Form from './components/Form'
 import List from './components/List'
+import AdmindBudget from './components/AdminBudget';
 
 function App() {
 
@@ -9,14 +10,25 @@ function App() {
   const [ budget, setBudget ] = useState(0);
   const [ balance, setBalance ] = useState(0);
   const [ show_question, setShowQuestion ] = useState(true);
-  const [ expenses, setExpenses] = useState([]);
+  const [ expenses, setExpenses ] = useState([]);
+  const [ expense, setExpense ] = useState({});
+  const [ create_expense, setCreateExpense ] = useState(false);
 
-  const addNewExpense = expense  => {
-    setExpenses([
-      ...expenses,
-      expense
-    ])
-  }
+  // Use Effect to update balance
+  useEffect(() => {
+    if(create_expense){
+      setExpenses([
+        ...expenses,
+        expense
+      ])
+      // Calculate new balance
+      const newBalance = balance - expense.quantity
+      setBalance(newBalance)
+      setCreateExpense(false)
+    }
+    // eslint-disable-next-line
+  }, [expense]);
+
 
   return (
     <div className="container">
@@ -38,12 +50,17 @@ function App() {
             <div className="row">
               <div className="one-half column">
                 <Form
-                  addNewExpense={addNewExpense}
+                  setExpense={setExpense}
+                  setCreateExpense={setCreateExpense}
                 />
               </div>
               <div className="one-half column">
                 <List
                   expenses={expenses}
+                />
+                <AdmindBudget
+                  budget={budget}
+                  balance={balance}
                 />
               </div>
             </div>

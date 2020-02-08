@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Error from './Error'
 import shortid from 'shortid'
 
-const Form = ({addNewExpense}) => {
+const Form = ({setExpense, setCreateExpense}) => {
 
     const [name, setName] = useState('');
     const [quantity, setQuantity] = useState(0);
@@ -24,8 +24,8 @@ const Form = ({addNewExpense}) => {
             quantity,
             id: shortid.generate()
         }
-        addNewExpense(expense)
-        
+        setExpense(expense)
+        setCreateExpense(true)
         // reset form
         setName('')
         setQuantity(0)
@@ -69,7 +69,8 @@ const Form = ({addNewExpense}) => {
  
 
 Form.prototype = {
-    addNewExpense: PropTypes.func.isRequired
+    setExpense: PropTypes.func.isRequired,
+    setCreateExpense: PropTypes.func.isRequired
 }
 
 export default Form;
